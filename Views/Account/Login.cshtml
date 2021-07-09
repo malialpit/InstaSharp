@@ -1,0 +1,39 @@
+﻿@using InstaSharp.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+}
+
+<div class="thin-wrapper">
+    <p class="title center">Instagram</p>
+
+    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @Html.TextBoxFor(m => m.Username, new { @placeholder = "Username" })
+        @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
+
+        @Html.PasswordFor(m => m.Password, new { @placeholder = "Password" })
+        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+
+        @Html.CheckBoxFor(m => m.RememberMe)
+        @Html.LabelFor(m => m.RememberMe)
+
+        <p>
+            <button type="submit" class="btn btn-default"><i class="fa fa-sign-in"></i>Log in</button>
+        </p>
+        <p>
+            @Html.ActionLink("Register as a new user", "Register")
+        </p>
+
+            @*<p>
+                @Html.ActionLink("Forgot your password?", "ForgotPassword")
+            </p>*@
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
